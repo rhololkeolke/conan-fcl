@@ -52,6 +52,7 @@ class FCLConan(ConanFile):
         cmake = CMake(self)
         cmake.definitions["BUILD_TESTING"] = False
         cmake.definitions["FCL_STATIC_LIBRARY"] = not self.options.shared
+        cmake.definitions["CMAKE_POSITION_INDEPENDENT_CODE"] = self.options.fPIC
         cmake.configure(build_folder=self._build_subfolder)
         return cmake
 
