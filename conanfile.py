@@ -6,7 +6,7 @@ from conans import CMake, ConanFile, tools
 
 class FCLConan(ConanFile):
     name = "fcl"
-    version = "0.6.0RC"
+    version = "0.5.0"
     description = "Flexible Collision Library"
     # topics can get used for searches, GitHub topics, Bintray tags etc. Add here keywords about the library
     topics = ("simulation", "physics")
@@ -45,7 +45,7 @@ class FCLConan(ConanFile):
         # git.clone("https://github.com/conan-io/hello.git")
         git = tools.Git(folder=self._source_subfolder)
         git.clone(
-            "https://github.com/flexible-collision-library/fcl.git", branch=self.version
+            "https://github.com/flexible-collision-library/fcl.git", branch='fcl-0.5'
         )
 
     def _configure_cmake(self):
