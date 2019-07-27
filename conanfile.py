@@ -32,7 +32,7 @@ class FCLConan(ConanFile):
 
     requires = (
         "libccd/2.1@rhololkeolke/stable",
-        "octomap/1.9.0@rhololkeolke/stable",
+        "octomap/1.6.8@rhololkeolke/stable",
         "eigen/3.3.7@conan/stable",
     )
 
