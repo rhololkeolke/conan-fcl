@@ -57,6 +57,18 @@ class FCLConan(ConanFile):
         git.clone(
             "https://github.com/flexible-collision-library/fcl.git", branch=self.version
         )
+        tools.replace_in_file(
+            f"{self._source_subfolder}/CMakeLists.txt",
+            "find_package(octomap QUIET)",
+            'set(PC_OCTOMAP_VERSION "1.9.0")\n'
+            "set(PC_OCTOMAP_INCLUDE_DIRS ${CONAN_INCLUDE_DIRS_OCTOMAP})\n"
+            "set(PC_OCTOMAP_LIBRARY_DIRS ${CONAN_LIB_DIRS_OCTOMAP})",
+        )
+        tools.replace_in_file(
+            f"{self._source_subfolder}/CMakeLists.txt",
+            'set(OCTOMAP_VERSION "${PC_OCTOMAP_VERSION}"',
+            'set(OCTOMAP_VERSION "1.9.0"',
+        )
 
     def _configure_cmake(self):
         cmake = CMake(self)
