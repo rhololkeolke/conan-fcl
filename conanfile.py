@@ -23,16 +23,26 @@ class FCLConan(ConanFile):
 
     # Options may need to change depending on the packaged library.
     settings = "os", "arch", "compiler", "build_type"
-    options = {"shared": [True, False], "fPIC": [True, False]}
-    default_options = {"shared": False, "fPIC": True}
+    options = {
+        "shared": [True, False],
+        "fPIC": [True, False],
+        "use_sse": [True, False],
+        "use_native_arch": [True, False],
+    }
+    default_options = {
+        "shared": False,
+        "fPIC": True,
+        "use_sse": True,
+        "use_native_arch": False,
+    }
 
     # Custom attributes for Bincrafters recipe conventions
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
 
     requires = (
-        "libccd/2.1@rhololkeolke/stable",
-        "octomap/1.9.0@rhololkeolke/stable",
+        "libccd/2.1@rhololkeolke/testing",
+        "octomap/1.9.0@rhololkeolke/testing",
         "eigen/3.3.7@conan/stable",
     )
 
@@ -53,6 +63,8 @@ class FCLConan(ConanFile):
         cmake.definitions["BUILD_TESTING"] = False
         cmake.definitions["FCL_STATIC_LIBRARY"] = not self.options.shared
         cmake.definitions["CMAKE_POSITION_INDEPENDENT_CODE"] = self.options.fPIC
+        cmake.definitions["FCL_USE_x64_SSE"] = self.options.use_sse
+        cmake.definitions["FCL_USE_HOST_NATIVE_ARCH"] = self.options.use_native_arch
         cmake.configure(build_folder=self._build_subfolder)
         return cmake
 
