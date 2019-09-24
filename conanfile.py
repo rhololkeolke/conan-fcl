@@ -41,8 +41,8 @@ class FCLConan(ConanFile):
     _build_subfolder = "build_subfolder"
 
     requires = (
-        "libccd/2.1@rhololkeolke/testing",
-        "octomap/1.9.0@rhololkeolke/testing",
+        "libccd/2.1@rhololkeolke/stable",
+        "octomap/1.9.0@rhololkeolke/stable",
         "eigen/3.3.7@conan/stable",
     )
 
